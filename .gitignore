@@ -1,0 +1,63 @@
+# ---------------------------
+# Global
+# ---------------------------
+# OS/system files
+.DS_Store
+Thumbs.db
+
+# IDEs/editors
+.idea/
+.vscode/
+*.iml
+*.swp
+
+# Logs and temporary files
+*.log
+logs/
+temp/
+tmp/
+*.bak
+*.out
+
+# ---------------------------
+# Node / React frontend
+# ---------------------------
+/frontend/node_modules/
+/frontend/build/
+/frontend/dist/
+/frontend/.env
+/frontend/.parcel-cache/
+/frontend/.next/
+/frontend/.vercel/
+/frontend/npm-debug.log*
+/frontend/yarn-error.log*
+/frontend/.turbo/
+/frontend/.cache/
+
+# ---------------------------
+# Spring Boot backend
+# ---------------------------
+/backend/target/
+/backend/.env
+/backend/.classpath
+/backend/.project
+/backend/.settings/
+/backend/*.iml
+
+# Maven / Gradle stuff
+/backend/.mvn/
+/backend/mvnw
+/backend/mvnw.cmd
+/backend/build/
+.backend/*.log
+
+# ---------------------------
+# OS-level & misc
+# ---------------------------
+*.class
+*.jar
+*.war
+*.ear
+
+
+.vscode/
