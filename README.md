@@ -333,14 +333,13 @@ Contributions are welcome! Please follow these steps:
 4. Push to the branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
 
-## 📝 License
-
-This project is open source and available under the [MIT License](LICENSE).
 
 ## 👨‍💻 Author
 
-**Muhammad Mustafa**
-- GitHub: [@MuhammadMustafa18](https://github.com/MuhammadMustafa18)
+**Abdullah Karim 24K-0932**
+**Usman Hassan 24K-0567**
+**Zaid 24K-0636**
+
 
 ## 🙏 Acknowledgments
 
