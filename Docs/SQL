@@ -1,0 +1,120 @@
+CREATE TABLE "player" (
+  "player_id" int,
+  "player_name" varchar(20),
+  PRIMARY KEY ("player_id")
+);
+
+CREATE INDEX "Key" ON  "player" ("player_name");
+
+CREATE TABLE "Team" (
+  "team_id" int,
+  "team_name" varchar(20),
+  "coach" varchar(20),
+  PRIMARY KEY ("team_id")
+);
+
+CREATE INDEX "Key" ON  "Team" ("team_name", "coach");
+
+CREATE TABLE "tournament" (
+  "tournament_id" int,
+  "tournament_name" varchar(20),
+  "organizer_name" varchar(20),
+  "tournament_format" varchar(20),
+  PRIMARY KEY ("tournament_id")
+);
+
+CREATE INDEX "Key" ON  "tournament" ("tournament_name", "organizer_name", "tournament_format");
+
+CREATE TABLE "Match" (
+  "match_id" int,
+  "team1_id" int,
+  "team2_id" int,
+  "toss_winner_id" int,
+  "toss_decision" varchar(20),
+  "match_winner_id" int,
+  "venue" varchar(20),
+  "match_date" date,
+  "match_state" varchar(20),
+  "tournament_id" int,
+  PRIMARY KEY ("match_id"),
+  CONSTRAINT "FK_Match_match_winner_id"
+    FOREIGN KEY ("match_winner_id")
+      REFERENCES "Team"("team_id"),
+  CONSTRAINT "FK_Match_toss_winner_id"
+    FOREIGN KEY ("toss_winner_id")
+      REFERENCES "Team"("team_id"),
+  CONSTRAINT "FK_Match_team2_id"
+    FOREIGN KEY ("team2_id")
+      REFERENCES "Team"("team_id"),
+  CONSTRAINT "FK_Match_team1_id"
+    FOREIGN KEY ("team1_id")
+      REFERENCES "Team"("team_id"),
+  CONSTRAINT "FK_Match_tournament_id"
+    FOREIGN KEY ("tournament_id")
+      REFERENCES "tournament"("tournament_id")
+);
+
+CREATE INDEX "Key" ON  "Match" ("toss_decision", "venue", "match_date", "match_state");
+
+CREATE TABLE "innings_id" (
+  "innings_id" int,
+  "match_id" int,
+  "innings_number" int,
+  "batting_team_id" int,
+  "bowling_team_id" int,
+  "runs" int,
+  "wickets" int,
+  "overs" numeric,
+  "extras" int,
+  PRIMARY KEY ("innings_id"),
+  CONSTRAINT "FK_innings_id_bowling_team_id"
+    FOREIGN KEY ("bowling_team_id")
+      REFERENCES "Team"("team_id"),
+  CONSTRAINT "FK_innings_id_batting_team_id"
+    FOREIGN KEY ("batting_team_id")
+      REFERENCES "Team"("team_id"),
+  CONSTRAINT "FK_innings_id_match_id"
+    FOREIGN KEY ("match_id")
+      REFERENCES "Match"("match_id")
+);
+
+CREATE INDEX "Key" ON  "innings_id" ("innings_number", "runs", "wickets", "overs", "extras");
+
+CREATE TABLE "ball_by_ball" (
+  "ball_id" int,
+  "innings_id" int,
+  "over_number" int,
+  "ball_number" int,
+  "batsman_id" int,
+  "bowler_id" int,
+  "non_striker_id" int,
+  "runs_scored" int,
+  "is_wicket" boolean,
+  "runs_extras" int,
+  "wicket_type" varchar(20),
+  PRIMARY KEY ("ball_id"),
+  CONSTRAINT "FK_ball_by_ball_non_striker_id"
+    FOREIGN KEY ("non_striker_id")
+      REFERENCES "player"("player_id"),
+  CONSTRAINT "FK_ball_by_ball_batsman_id"
+    FOREIGN KEY ("batsman_id")
+      REFERENCES "player"("player_id"),
+  CONSTRAINT "FK_ball_by_ball_bowler_id"
+    FOREIGN KEY ("bowler_id")
+      REFERENCES "player"("player_id"),
+  CONSTRAINT "FK_ball_by_ball_innings_id"
+    FOREIGN KEY ("innings_id")
+      REFERENCES "innings_id"("innings_id")
+);
+
+CREATE INDEX "Key" ON  "ball_by_ball" ("over_number", "ball_number", "runs_scored", "is_wicket", "runs_extras", "wicket_type");
+
+CREATE TABLE "Team_player" (
+  "team_id" int,
+  "player_id" int,
+  "join_date" date,
+  PRIMARY KEY ("team_id", "player_id")
+);
+
+CREATE INDEX "Key" ON  "Team_player" ("join_date");
+
