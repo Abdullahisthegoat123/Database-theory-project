@@ -18,9 +18,11 @@ public class BallController {
         this.ballService = ballService;
     }
 
-    @PostMapping
-    public Ball createBall(@RequestBody Ball ball) {
-        return ballService.saveBall(ball);
+    @PostMapping("/record")
+    public Ball recordBall(@RequestParam int matchId,
+                           @RequestParam int inningsId,
+                           @RequestBody Ball ball) {
+        return ballService.recordBallWithMatchUpdate(matchId, inningsId, ball);
     }
 
     @GetMapping
